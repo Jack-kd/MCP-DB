@@ -84,8 +84,8 @@ public class BoreClient {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void runTunnel() {
-        InputStream in;
-        String response;
+        InputStream in = null;
+        String response = null;
         try {
             try {
                 log("连接到 " + this.serverHost + ":" + CONTROL_PORT + " ...");
@@ -103,53 +103,53 @@ public class BoreClient {
                 sendMessage(out, helloMsg);
                 log("已发送 Hello(" + this.requestedRemotePort + ")");
                 response = recvMessage(in);
+                if (response == null) {
+                    error("服务端关闭了连接");
+                } else if (!response.startsWith("{\"Hello")) {
+                    if (!response.contains("\"Error\"")) {
+                        error("意外的响应: " + response);
+                        return;
+                    }
+                    JSONObject json = new JSONObject(response);
+                    String errMsg = json.getString("Error");
+                    error("服务端错误: " + errMsg);
+                } else {
+                    JSONObject json2 = new JSONObject(response);
+                    this.assignedRemotePort = json2.getInt("Hello");
+                    String publicUrl = "tcp://" + this.serverHost + ":" + this.assignedRemotePort;
+                    String mcpUrl = "http://" + this.serverHost + ":" + this.assignedRemotePort + "/mcp";
+                    log("分配到公网端口: " + this.assignedRemotePort);
+                    log("监听地址: " + this.serverHost + ":" + this.assignedRemotePort);
+                    this.callback.onConnected(publicUrl, mcpUrl);
+                    log("进入监听循环...");
+                    while (true) {
+                        if (!this.running) {
+                            break;
+                        }
+                        String msg = recvMessage(in);
+                        if (msg == null) {
+                            log("控制连接已断开");
+                            break;
+                        } else if (msg.equals("\"Heartbeat\"")) {
+                            Log.d(TAG, "收到心跳");
+                        } else if (msg.startsWith("{\"Connection")) {
+                            JSONObject json3 = new JSONObject(msg);
+                            String connId = json3.getString("Connection");
+                            log("新连接请求: " + connId.substring(0, 8) + "...");
+                            handleDataConnection(connId);
+                        } else if (msg.contains("\"Error\"")) {
+                            JSONObject json4 = new JSONObject(msg);
+                            error("服务端错误: " + json4.getString("Error"));
+                            break;
+                        } else {
+                            Log.w(TAG, "未知消息: " + msg);
+                        }
+                    }
+                }
             } catch (Exception e) {
                 if (this.running) {
                     error("隧道异常: " + e.getMessage());
                     Log.e(TAG, "隧道异常", e);
-                }
-            }
-            if (response == null) {
-                error("服务端关闭了连接");
-            } else if (!response.startsWith("{\"Hello")) {
-                if (!response.contains("\"Error\"")) {
-                    error("意外的响应: " + response);
-                    return;
-                }
-                JSONObject json = new JSONObject(response);
-                String errMsg = json.getString("Error");
-                error("服务端错误: " + errMsg);
-            } else {
-                JSONObject json2 = new JSONObject(response);
-                this.assignedRemotePort = json2.getInt("Hello");
-                String publicUrl = "tcp://" + this.serverHost + ":" + this.assignedRemotePort;
-                String mcpUrl = "http://" + this.serverHost + ":" + this.assignedRemotePort + "/mcp";
-                log("分配到公网端口: " + this.assignedRemotePort);
-                log("监听地址: " + this.serverHost + ":" + this.assignedRemotePort);
-                this.callback.onConnected(publicUrl, mcpUrl);
-                log("进入监听循环...");
-                while (true) {
-                    if (!this.running) {
-                        break;
-                    }
-                    String msg = recvMessage(in);
-                    if (msg == null) {
-                        log("控制连接已断开");
-                        break;
-                    } else if (msg.equals("\"Heartbeat\"")) {
-                        Log.d(TAG, "收到心跳");
-                    } else if (msg.startsWith("{\"Connection")) {
-                        JSONObject json3 = new JSONObject(msg);
-                        String connId = json3.getString("Connection");
-                        log("新连接请求: " + connId.substring(0, 8) + "...");
-                        handleDataConnection(connId);
-                    } else if (msg.contains("\"Error\"")) {
-                        JSONObject json4 = new JSONObject(msg);
-                        error("服务端错误: " + json4.getString("Error"));
-                        break;
-                    } else {
-                        Log.w(TAG, "未知消息: " + msg);
-                    }
                 }
             }
         } finally {
