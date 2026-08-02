@@ -1,0 +1,50 @@
+name: HarmonyOS Build
+
+on:
+  push:
+    branches: [harmonyos-migration, main]
+  pull_request:
+    branches: [harmonyos-migration, main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: registry.cn-qingdao.aliyuncs.com/xuxiaoweicomcn/hmos-command:6.1.0.830
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install ohpm dependencies
+        run: |
+          ohpm config set registry https://ohpm.openharmony.cn/ohpm/
+          ohpm install --all
+
+      - name: Generate auto-signing
+        run: |
+          hvigorw generateSigningConfig --type debug || true
+
+      - name: Build HAP
+        run: hvigorw assembleHap --mode module -p module=entry@default -p product=default -p buildMode=debug --no-daemon
+
+      - name: Upload HAP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MCP-Bridge-HarmonyOS
+          path: |
+            entry/build/default/outputs/default/*.hap
+            entry/build/**/outputs/**/*.hap
+
+      - name: Upload HAP (fallback search)
+        if: failure()
+        run: |
+          echo "Searching for HAP files..."
+          find . -name "*.hap" -type f 2>/dev/null || echo "No HAP files found"
+          find . -name "*.hsp" -type f 2>/dev/null || echo "No HSP files found"
