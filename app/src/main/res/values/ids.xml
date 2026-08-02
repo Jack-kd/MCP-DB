@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="status_dot" />
+    <item type="id" name="tv_status" />
+    <item type="id" name="et_local_port" />
+    <item type="id" name="et_remote_server" />
+    <item type="id" name="et_secret" />
+    <item type="id" name="btn_start" />
+    <item type="id" name="btn_stop" />
+    <item type="id" name="btn_copy" />
+    <item type="id" name="tv_public_url" />
+    <item type="id" name="tv_mcp_url" />
+    <item type="id" name="tv_log" />
+    <item type="id" name="dialog_button" />
+</resources>
