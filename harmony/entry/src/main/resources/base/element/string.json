@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "entry_desc",
+      "value": "MCP Bridge 内网穿透客户端"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "MCP Bridge 主界面"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "MCP Bridge"
+    },
+    {
+      "name": "internet_permission_reason",
+      "value": "需要网络权限以建立隧道连接"
+    },
+    {
+      "name": "network_permission_reason",
+      "value": "需要获取网络状态以监控连接"
+    },
+    {
+      "name": "background_permission_reason",
+      "value": "需要后台运行权限以保持隧道连接"
+    }
+  ]
+}

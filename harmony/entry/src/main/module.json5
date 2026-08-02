@@ -1,0 +1,55 @@
+{
+  "apiVersion": 12,
+  "name": "entry",
+  "srcEntry": "./ets/entryability/EntryAbility.ets",
+  "description": "$string:entry_desc",
+  "mainElement": "EntryAbility",
+  "abilities": [
+    {
+      "name": "EntryAbility",
+      "srcEntry": "./ets/entryability/EntryAbility.ets",
+      "description": "$string:EntryAbility_desc",
+      "icon": "$media:app_icon",
+      "label": "$string:EntryAbility_label",
+      "startWindowIcon": "$media:start_icon",
+      "startWindowBackground": "$color:start_window_background",
+      "launchType": "singleton",
+      "orientation": "portrait",
+      "backgroundModes": ["dataTransfer"]
+    }
+  ],
+  "extensionAbilities": [
+    {
+      "name": "TunnelServiceAbility",
+      "srcEntry": "./ets/service/TunnelServiceAbility.ets",
+      "type": "service",
+      "exported": false
+    }
+  ],
+  "requestPermissions": [
+    {
+      "name": "ohos.permission.INTERNET",
+      "reason": "$string:internet_permission_reason",
+      "usedScene": {
+        "abilities": ["EntryAbility"],
+        "when": "always"
+      }
+    },
+    {
+      "name": "ohos.permission.GET_NETWORK_INFO",
+      "reason": "$string:network_permission_reason",
+      "usedScene": {
+        "abilities": ["EntryAbility"],
+        "when": "always"
+      }
+    },
+    {
+      "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
+      "reason": "$string:background_permission_reason",
+      "usedScene": {
+        "abilities": ["EntryAbility"],
+        "when": "always"
+      }
+    }
+  ]
+}
