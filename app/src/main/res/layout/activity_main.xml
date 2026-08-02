@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:background="@color/ios_bg_grouped" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:paddingTop="12.0dip" android:paddingBottom="40.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="16.0dip">
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip">
+            <FrameLayout android:layout_width="56.0dip" android:layout_height="56.0dip" android:layout_marginEnd="14.0dip">
+                <View android:background="@drawable/icon_container" android:layout_width="56.0dip" android:layout_height="56.0dip" android:elevation="2.0dip" />
+                <TextView android:textSize="26.0sp" android:gravity="center" android:layout_width="56.0dip" android:layout_height="56.0dip" android:text="🔗" android:elevation="2.0dip" />
+            </FrameLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <TextView android:textAppearance="@style/TextAppearance.iOS.LargeTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="MCP Bridge" />
+                <TextView android:textAppearance="@style/TextAppearance.iOS.Secondary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="MT管理器 MCP 内网穿透" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView android:textAppearance="@style/TextAppearance.iOS.SectionHeader" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:text="状态" android:layout_marginStart="16.0dip" />
+        <LinearLayout android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="24.0dip">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <View android:id="@id/status_dot" android:background="@drawable/status_dot_red" android:layout_width="10.0dip" android:layout_height="10.0dip" />
+                <TextView android:textSize="17.0sp" android:textStyle="bold" android:textColor="@color/ios_red" android:id="@id/tv_status" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="已停止" android:layout_weight="1.0" android:layout_marginStart="10.0dip" />
+                <TextView android:textSize="20.0sp" android:textColor="@color/ios_label_tertiary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="●" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView android:textAppearance="@style/TextAppearance.iOS.SectionHeader" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:text="隧道配置" android:layout_marginStart="16.0dip" />
+        <LinearLayout android:orientation="vertical" android:background="@drawable/card_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="24.0dip">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="16.0dip">
+                <TextView android:textSize="13.0sp" android:textColor="@color/ios_label_secondary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="14.0dip" android:layout_marginBottom="6.0dip" android:text="本地端口" />
+                <EditText android:textSize="16.0sp" android:textColor="@color/ios_label" android:id="@id/et_local_port" android:background="@drawable/edittext_bg" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="8787" android:singleLine="true" android:inputType="number" android:textCursorDrawable="@null" android:paddingHorizontal="12.0dip" />
+            </LinearLayout>
+            <View android:background="@color/ios_separator_opaque" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginStart="16.0dip" android:layout_marginVertical="12.0dip" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="16.0dip">
+                <TextView android:textSize="13.0sp" android:textColor="@color/ios_label_secondary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:text="远程服务器" />
+                <EditText android:textSize="16.0sp" android:textColor="@color/ios_label" android:id="@id/et_remote_server" android:background="@drawable/edittext_bg" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="bore.pub" android:singleLine="true" android:inputType="text" android:textCursorDrawable="@null" android:paddingHorizontal="12.0dip" />
+            </LinearLayout>
+            <View android:background="@color/ios_separator_opaque" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginStart="16.0dip" android:layout_marginVertical="12.0dip" />
+            <LinearLayout android:orientation="vertical" android:paddingBottom="14.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="16.0dip">
+                <TextView android:textSize="13.0sp" android:textColor="@color/ios_label_secondary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:text="认证密钥" />
+                <EditText android:textSize="16.0sp" android:textColor="@color/ios_label" android:textColorHint="@color/ios_label_tertiary" android:id="@id/et_secret" android:background="@drawable/edittext_bg" android:layout_width="fill_parent" android:layout_height="40.0dip" android:hint="公共服务器留空" android:singleLine="true" android:inputType="textPassword" android:textCursorDrawable="@null" android:paddingHorizontal="12.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+        <Button android:id="@id/btn_start" android:layout_width="fill_parent" android:layout_height="50.0dip" android:layout_marginBottom="10.0dip" android:text="启动隧道" style="@style/Widget.iOS.Button.Filled" />
+        <Button android:enabled="false" android:id="@id/btn_stop" android:layout_width="fill_parent" android:layout_height="50.0dip" android:layout_marginBottom="24.0dip" android:text="停止隧道" android:alpha="0.5" style="@style/Widget.iOS.Button.Outlined" />
+        <TextView android:textAppearance="@style/TextAppearance.iOS.SectionHeader" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:text="连接地址" android:layout_marginStart="16.0dip" />
+        <LinearLayout android:orientation="vertical" android:background="@drawable/card_bg" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="24.0dip">
+            <TextView android:textSize="13.0sp" android:textColor="@color/ios_label_secondary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:text="公网地址" />
+            <TextView android:textSize="15.0sp" android:textColor="@color/ios_blue" android:id="@id/tv_public_url" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip" android:text="等待连接…" android:textIsSelectable="true" android:fontFamily="monospace" />
+            <View android:background="@color/ios_separator_opaque" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginBottom="14.0dip" />
+            <TextView android:textSize="13.0sp" android:textColor="@color/ios_label_secondary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip" android:text="MCP 连接地址" />
+            <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="@color/ios_green" android:id="@id/tv_mcp_url" android:background="@drawable/url_bg" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip" android:text="等待连接…" android:textIsSelectable="true" android:fontFamily="monospace" />
+            <Button android:enabled="false" android:textSize="15.0sp" android:id="@id/btn_copy" android:layout_width="fill_parent" android:layout_height="44.0dip" android:text="复制 MCP 地址" style="@style/Widget.iOS.Button.Filled" />
+        </LinearLayout>
+        <TextView android:textAppearance="@style/TextAppearance.iOS.SectionHeader" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="6.0dip" android:text="运行日志" android:layout_marginStart="16.0dip" />
+        <TextView android:textSize="12.0sp" android:textColor="#ff98fb98" android:gravity="bottom" android:id="@id/tv_log" android:background="@drawable/log_bg" android:padding="14.0dip" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="200.0dip" android:lineSpacingExtra="2.0dip" android:textIsSelectable="true" android:fontFamily="monospace" />
+        <TextView android:textSize="13.0sp" android:textColor="@color/ios_label_secondary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:text="使用步骤\n1. 在 MT管理器中启动 APK MCP 服务\n2. 记住端口号（默认 8787）\n3. 点击「启动隧道」\n4. 复制 MCP 地址，粘贴到 iMa Copilot 中连接\n5. 保持本应用后台运行\n\n本应用纯 Java 实现 bore 协议，无需 Termux 或外部二进制" android:lineSpacingExtra="4.0dip" android:layout_marginHorizontal="8.0dip" />
+    </LinearLayout>
+</ScrollView>
