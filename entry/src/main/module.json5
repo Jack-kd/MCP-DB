@@ -1,4 +1,5 @@
 {
+  "moduleType": "entry",
   "apiVersion": 12,
   "name": "entry",
   "srcEntry": "./ets/entryability/EntryAbility.ets",
