@@ -1,0 +1,17 @@
+# HarmonyOS
+.hvigor/
+oh_modules/
+**/build/
+**/.cxx/
+**/.preview/
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local config
+local.properties

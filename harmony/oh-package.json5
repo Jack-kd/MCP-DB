@@ -1,0 +1,14 @@
+{
+  "name": "mcpbridge",
+  "version": "1.0.0",
+  "description": "MCP Bridge - 内网穿透隧道客户端",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@ohos/hvigor-ohos-plugin": "5.0.2",
+    "@ohos/hvigor": "5.0.2"
+  }
+}
