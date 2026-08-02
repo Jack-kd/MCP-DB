@@ -6,7 +6,5 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "@ohos/netSocket": "1.0.0",
-    "@ohos/cryptoFramework": "1.0.0"
   }
 }

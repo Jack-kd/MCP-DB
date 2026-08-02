@@ -22,17 +22,30 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install ohpm dependencies
+      - name: Setup hvigor wrapper
         run: |
-          ohpm config set registry https://ohpm.openharmony.cn/ohpm/
-          ohpm install --all
+          # 使用 Docker 镜像自带的 hvigor-wrapper 生成项目 wrapper
+          if [ ! -f hvigorw ]; then
+            cp /opt/command-line-tools/bin/hvigorw ./hvigorw 2>/dev/null || true
+          fi
+          chmod +x hvigorw 2>/dev/null || true
+          echo "=== hvigor version ==="
+          hvigorw --version 2>&1 || echo "hvigorw not found, trying alternative..."
 
-      - name: Generate auto-signing
+      - name: Build HAP (debug)
         run: |
-          hvigorw generateSigningConfig --type debug || true
+          hvigorw assembleHap \
+            -p buildMode=debug \
+            -p module=entry@default \
+            -p product=default \
+            --no-daemon
 
-      - name: Build HAP
-        run: hvigorw assembleHap --mode module -p module=entry@default -p product=default -p buildMode=debug --no-daemon
+      - name: Locate and upload HAP
+        run: |
+          echo "=== Searching for HAP ==="
+          find . -name "*.hap" -type f 2>/dev/null || echo "No HAP found"
+          echo "=== Build output tree ==="
+          find entry/build -type f 2>/dev/null | head -50 || echo "No build output"
 
       - name: Upload HAP artifact
         uses: actions/upload-artifact@v4
@@ -41,10 +54,3 @@ jobs:
           path: |
             entry/build/default/outputs/default/*.hap
             entry/build/**/outputs/**/*.hap
-
-      - name: Upload HAP (fallback search)
-        if: failure()
-        run: |
-          echo "Searching for HAP files..."
-          find . -name "*.hap" -type f 2>/dev/null || echo "No HAP files found"
-          find . -name "*.hsp" -type f 2>/dev/null || echo "No HSP files found"
